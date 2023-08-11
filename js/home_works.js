@@ -23,11 +23,9 @@ const parentBlockWidth = 500;
 
 function moveRight(position) {
     const maxPosition = parentBlockWidth - childBlockWidth;
-
     if (position >= maxPosition) {
         return;
     }
-
     childBlock.style.left = `${position}px`;
     setTimeout(() => {
         moveRight(position + 1);
