@@ -41,8 +41,8 @@ const move = () => {
     }
 }
 move()
-// -------------------
 
+// -------TIMER------------
 
 const minutesElement = document.getElementById('minutes');
 const secondsElement = document.getElementById('seconds');
@@ -75,8 +75,6 @@ function updateTimer() {
         mlSecondsElement.textContent = mlSeconds.toString().padStart(2, '0');
     }
 }
-
-
 function startTimer() {
     if (!isRunning && !wasStopped) {
         intervalId = setInterval(updateTimer, 10);
@@ -86,7 +84,6 @@ function startTimer() {
         resumeButton.disabled = true;
     }
 }
-
 function stopTimer() {
     clearInterval(intervalId);
     isRunning = false;
@@ -95,7 +92,6 @@ function stopTimer() {
     stopButton.disabled = true;
     resumeButton.disabled = false;
 }
-
 function resumeTimer() {
     if (!isRunning && intervalId) {
         intervalId = setInterval(updateTimer, 10);
@@ -106,7 +102,6 @@ function resumeTimer() {
         resumeButton.disabled = true;
     }
 }
-
 function resetTimer() {
     clearInterval(intervalId);
     isRunning = false;
