@@ -107,17 +107,21 @@ const btnPrev = document.querySelector("#btn-prev");
 const btnNext = document.querySelector("#btn-next");
 let count = 1;
 
-const updateCard = (count) => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-        .then(response => response.json())
-        .then(data => {
-            card.innerHTML = `
-                <p>${data.title}</p>
-                <p style="color: ${data.completed ? 'green' : 'red'}">${data.completed}</p>
-                <span>${data.id}</span>
-            `;
-        });
+const updateCard = async (count) => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${count}`);
+        const data = await response.json();
+
+        card.innerHTML = `
+            <p>${data.title}</p>
+            <p style="color: ${data.completed ? 'green' : 'red'}">${data.completed}</p>
+            <span>${data.id}</span>
+        `;
+    } catch (error) {
+        console.error("Произошла ошибка:", error);
+    }
 };
+
 const changeCard = (increment) => {
     count += increment;
     if (count < 1) {
@@ -125,26 +129,51 @@ const changeCard = (increment) => {
     } else if (count > 200) {
         count = 1;
     }
-    updateCard(count);
+    return updateCard(count);
 };
 
-btnPrev.onclick = () => {
-    changeCard(-1);
+btnPrev.onclick = async () => {
+    await changeCard(-1);
 };
 
-btnNext.onclick = () => {
-    changeCard(1);
+btnNext.onclick = async () => {
+    await changeCard(1);
 };
-updateCard(count);
-
-
+(async () => {
+    await updateCard(count);
+})();
 
 //вторая часть дз
-const qwerty = () => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        });
-};
+const qwerty = async () => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+        const data = await response.json()
+        console.log(data)
+    } catch (error) {
+        console.error('Ошибка', error)
+    }
+}
 qwerty();
+
+//--------------------weather------------------------
+const cityName = document.querySelector('.cityName')
+const city = document.querySelector('.city')
+const temp = document.querySelector('.temp')
+const apiKey = 'e417df62e04d3b1b111abeab19cea714'
+const baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
+const citySearch = async () => {
+    cityName.oninput = async (event) => {
+        try {
+            const response = await fetch(`${baseUrl}?q=${event.target.value}&appid=${apiKey}`)
+            const data = await response.json()
+            city.innerHTML = data?.name ? data?.name : "Город не найден"
+            temp.innerHTML = data?.main?.temp ? Math.round(data?.main?.temp - 273) + "&deg;C" : "..."
+        } catch (error) {
+            console.log('ошибка', error)
+        }
+    }
+}
+(async () => {
+    await citySearch();
+})();
+

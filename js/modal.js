@@ -27,9 +27,9 @@ const ScrollAndOpenModal = () => {
 
 window.addEventListener('scroll', ScrollAndOpenModal);
 
-const openModalAfterDelay = () => {
-    setTimeout(() => {
-        openModal()
-    }, 10000)
-}
-window.addEventListener('load', openModalAfterDelay)
+// const openModalAfterDelay = () => {
+//     setTimeout(() => {
+//         openModal()
+//     }, 10000)
+// }
+// window.addEventListener('load', openModalAfterDelay)

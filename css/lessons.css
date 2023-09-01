@@ -145,23 +145,24 @@
 
 /*--------WEATHER API---------*/
 
-
 .weather {
     padding: 100px 0;
     background-color: black;
 }
 
-.search_block {
+.inner_weather>div{
     display: flex;
-    align-items: center;
     flex-direction: column;
-    row-gap: 20px;
-    margin: 50px 0;
+    align-items: center;
+    gap: 20px;
+    color:white;
+    font-size: 25px;
 }
-
-.city, .temp {
-    text-align: center;
-    font-size: 30px;
-    color: white;
-    margin: 10px 0;
+.inner_weather{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+hr{
+    width: 100%;
 }
